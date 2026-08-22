@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration - ExamPro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="/"><i class="bi bi-laptop me-2"></i>ExamPro</a>
+        <a href="/" class="btn btn-outline-light btn-sm rounded-pill"><i class="bi bi-house me-1"></i>Back to Home</a>
+    </div>
+</nav>
+
+<div class="container flex-grow-1 d-flex align-items-center justify-content-center py-5">
+    <div class="card shadow-lg" style="max-width: 500px; width: 100%;">
+        <div class="card-body p-5">
+            <div class="text-center mb-4">
+                <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-circle mb-3" style="width: 60px; height: 60px; font-size: 24px;">
+                    <i class="bi bi-person-plus"></i>
+                </div>
+                <h3 class="fw-bold text-gradient">Student Registration</h3>
+                <p class="text-muted">Create your account to take exams</p>
+            </div>
+
+            <div th:if="${error}" class="alert alert-danger" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i><span th:text="${error}"></span>
+            </div>
+
+            <form id="registerForm" th:action="@{/register}" th:object="${student}" method="post">
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-bold">Full Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control border-start-0" th:field="*{fullName}" placeholder="Enter full name" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-bold">Register Number</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-card-text"></i></span>
+                        <input type="text" class="form-control border-start-0" th:field="*{registerNumber}" placeholder="e.g. REG2026001" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-bold">Email Address</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope"></i></span>
+                        <input type="email" class="form-control border-start-0" th:field="*{email}" placeholder="Enter email" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-bold">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock"></i></span>
+                        <input type="password" class="form-control border-start-0" id="password" th:field="*{password}" placeholder="Create a password" minlength="6" required>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label text-muted small fw-bold">Confirm Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock-fill"></i></span>
+                        <input type="password" class="form-control border-start-0" id="confirmPassword" placeholder="Confirm your password" minlength="6" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-bold shadow-sm">Register Account</button>
+            </form>
+            <div class="text-center mt-4">
+                <p class="text-muted mb-0">Already have an account? <a href="/student-login" class="text-primary fw-bold text-decoration-none">Login here</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-white text-center py-3 mt-auto">
+    <div class="container">
+        <small>&copy; 2026 Online Examination System</small>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
